@@ -51,7 +51,7 @@ jobs:
 
       - name: Run ubuntu-image classic on runner (produces pc.img)
         run: |
-          sudo ubuntu-image classic -a amd64 -d -p ubuntu-cpc -s questing -i 850M \
+          sudo ubuntu-image classic -a amd64 -d -p ubuntu-cpc -s questing -i 2500M \
             --extra-ppas firmware-testing-team/ppa-fwts-stable \
             "$GITHUB_WORKSPACE/pc-amd64-gadget/prime"
           sudo xz pc.img
