@@ -26,7 +26,7 @@ jobs:
       - name: Clone build dependencies
         run: |
           git clone --depth 1 https://github.com/ivanhu5866/pc-amd64-gadget.git
-          git clone --depth 1 -b ubuntu/jammy https://github.com/ivanhu5866/fwts-livecd-rootfs.git
+          git clone --depth 1 -b ubuntu/noble https://github.com/ivanhu5866/fwts-livecd-rootfs.git
 
       - name: Set image name
         run: echo "IMAGE_NAME=fwts-live-${{ inputs.version }}-x86_64.img.xz" >> $GITHUB_ENV
