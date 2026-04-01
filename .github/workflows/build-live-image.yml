@@ -40,8 +40,20 @@ jobs:
       - name: Build Docker image
         run: docker build -t fwts-live .
 
-      - name: Run build (produces pc.img.xz)
-        run: docker run --privileged --rm -v "$GITHUB_WORKSPACE:/image" fwts-live
+      - name: Extract livecd-rootfs deb from Docker
+        run: docker run --rm -v "$GITHUB_WORKSPACE:/image" fwts-live
+
+      - name: Install ubuntu-image and livecd-rootfs on runner
+        run: |
+          sudo snap install ubuntu-image --classic
+          sudo apt install -y ./livecd-rootfs_*_amd64.deb
+
+      - name: Run ubuntu-image classic on runner (produces pc.img)
+        run: |
+          sudo ubuntu-image classic -a amd64 -d -p ubuntu-cpc -s questing -i 850M \
+            --extra-ppas firmware-testing-team/ppa-fwts-stable \
+            "$GITHUB_WORKSPACE/pc-amd64-gadget/prime"
+          sudo xz pc.img
 
       - name: Verify output
         run: test -f pc.img.xz || (echo "Build failed - pc.img.xz not found" && exit 1)
