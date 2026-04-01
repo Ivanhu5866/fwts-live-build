@@ -46,6 +46,7 @@ jobs:
       - name: Install ubuntu-image and livecd-rootfs on runner
         run: |
           sudo snap install ubuntu-image --classic
+          sudo apt-get update
           sudo apt install -y ./livecd-rootfs_*_amd64.deb
 
       - name: Run ubuntu-image classic on runner (produces pc.img)
