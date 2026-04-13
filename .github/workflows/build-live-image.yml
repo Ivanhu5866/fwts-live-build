@@ -33,6 +33,7 @@ jobs:
 
       - name: Build gadget prime (snapcraft on runner)
         run: |
+          sudo apt-get update
           sudo snap install snapcraft --classic
           cd pc-amd64-gadget
           snapcraft prime --destructive-mode
